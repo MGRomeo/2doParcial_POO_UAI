@@ -58,7 +58,6 @@
             this.btnOrdenar = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.btnPagar = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -67,6 +66,7 @@
             this.dtpVencimiento = new System.Windows.Forms.DateTimePicker();
             this.label = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.lblModificar = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSocios)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuotaPendiente)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuotaPagada)).BeginInit();
@@ -79,7 +79,7 @@
             // dgvSocios
             // 
             this.dgvSocios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSocios.Location = new System.Drawing.Point(26, 115);
+            this.dgvSocios.Location = new System.Drawing.Point(15, 58);
             this.dgvSocios.Name = "dgvSocios";
             this.dgvSocios.Size = new System.Drawing.Size(351, 150);
             this.dgvSocios.TabIndex = 0;
@@ -88,23 +88,23 @@
             // dgvCuotaPendiente
             // 
             this.dgvCuotaPendiente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCuotaPendiente.Location = new System.Drawing.Point(397, 115);
+            this.dgvCuotaPendiente.Location = new System.Drawing.Point(397, 58);
             this.dgvCuotaPendiente.Name = "dgvCuotaPendiente";
-            this.dgvCuotaPendiente.Size = new System.Drawing.Size(423, 150);
+            this.dgvCuotaPendiente.Size = new System.Drawing.Size(544, 96);
             this.dgvCuotaPendiente.TabIndex = 1;
             // 
             // dgvCuotaPagada
             // 
             this.dgvCuotaPagada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCuotaPagada.Location = new System.Drawing.Point(879, 115);
+            this.dgvCuotaPagada.Location = new System.Drawing.Point(397, 200);
             this.dgvCuotaPagada.Name = "dgvCuotaPagada";
-            this.dgvCuotaPagada.Size = new System.Drawing.Size(361, 150);
+            this.dgvCuotaPagada.Size = new System.Drawing.Size(544, 150);
             this.dgvCuotaPagada.TabIndex = 2;
             // 
             // dgvCuotaOrdenada
             // 
             this.dgvCuotaOrdenada.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCuotaOrdenada.Location = new System.Drawing.Point(871, 392);
+            this.dgvCuotaOrdenada.Location = new System.Drawing.Point(1079, 58);
             this.dgvCuotaOrdenada.Name = "dgvCuotaOrdenada";
             this.dgvCuotaOrdenada.Size = new System.Drawing.Size(240, 150);
             this.dgvCuotaOrdenada.TabIndex = 3;
@@ -112,7 +112,7 @@
             // dgvSocioTotal
             // 
             this.dgvSocioTotal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSocioTotal.Location = new System.Drawing.Point(1134, 391);
+            this.dgvSocioTotal.Location = new System.Drawing.Point(1079, 381);
             this.dgvSocioTotal.Name = "dgvSocioTotal";
             this.dgvSocioTotal.Size = new System.Drawing.Size(240, 150);
             this.dgvSocioTotal.TabIndex = 4;
@@ -128,7 +128,7 @@
             this.grpSocios.Controls.Add(this.label3);
             this.grpSocios.Controls.Add(this.label2);
             this.grpSocios.Controls.Add(this.label1);
-            this.grpSocios.Location = new System.Drawing.Point(26, 355);
+            this.grpSocios.Location = new System.Drawing.Point(54, 345);
             this.grpSocios.Name = "grpSocios";
             this.grpSocios.Size = new System.Drawing.Size(201, 216);
             this.grpSocios.TabIndex = 5;
@@ -224,7 +224,7 @@
             this.grpCuota.Controls.Add(this.rdbIndividual);
             this.grpCuota.Controls.Add(this.label5);
             this.grpCuota.Controls.Add(this.label6);
-            this.grpCuota.Location = new System.Drawing.Point(397, 291);
+            this.grpCuota.Location = new System.Drawing.Point(397, 375);
             this.grpCuota.Name = "grpCuota";
             this.grpCuota.Size = new System.Drawing.Size(200, 186);
             this.grpCuota.TabIndex = 6;
@@ -298,7 +298,7 @@
             // rdbMenorMayor
             // 
             this.rdbMenorMayor.AutoSize = true;
-            this.rdbMenorMayor.Location = new System.Drawing.Point(871, 557);
+            this.rdbMenorMayor.Location = new System.Drawing.Point(1079, 223);
             this.rdbMenorMayor.Name = "rdbMenorMayor";
             this.rdbMenorMayor.Size = new System.Drawing.Size(96, 17);
             this.rdbMenorMayor.TabIndex = 8;
@@ -309,7 +309,7 @@
             // rdbMayorMenor
             // 
             this.rdbMayorMenor.AutoSize = true;
-            this.rdbMayorMenor.Location = new System.Drawing.Point(871, 598);
+            this.rdbMayorMenor.Location = new System.Drawing.Point(1079, 264);
             this.rdbMayorMenor.Name = "rdbMayorMenor";
             this.rdbMayorMenor.Size = new System.Drawing.Size(96, 17);
             this.rdbMayorMenor.TabIndex = 7;
@@ -319,25 +319,27 @@
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(40, 287);
+            this.btnBorrar.Location = new System.Drawing.Point(54, 223);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(75, 23);
             this.btnBorrar.TabIndex = 7;
             this.btnBorrar.Text = "Borrar";
             this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(182, 287);
+            this.btnModificar.Location = new System.Drawing.Point(243, 223);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 8;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnOrdenar
             // 
-            this.btnOrdenar.Location = new System.Drawing.Point(1036, 573);
+            this.btnOrdenar.Location = new System.Drawing.Point(1244, 239);
             this.btnOrdenar.Name = "btnOrdenar";
             this.btnOrdenar.Size = new System.Drawing.Size(75, 42);
             this.btnOrdenar.TabIndex = 10;
@@ -346,7 +348,7 @@
             // 
             // btnSalir
             // 
-            this.btnSalir.Location = new System.Drawing.Point(1299, 598);
+            this.btnSalir.Location = new System.Drawing.Point(1244, 588);
             this.btnSalir.Name = "btnSalir";
             this.btnSalir.Size = new System.Drawing.Size(75, 23);
             this.btnSalir.TabIndex = 11;
@@ -356,7 +358,7 @@
             // 
             // btnPagar
             // 
-            this.btnPagar.Location = new System.Drawing.Point(745, 271);
+            this.btnPagar.Location = new System.Drawing.Point(927, 160);
             this.btnPagar.Name = "btnPagar";
             this.btnPagar.Size = new System.Drawing.Size(75, 23);
             this.btnPagar.TabIndex = 12;
@@ -364,21 +366,11 @@
             this.btnPagar.UseVisualStyleBackColor = true;
             this.btnPagar.Click += new System.EventHandler(this.btnPagar_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(456, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(187, 26);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Sistema de Cobro";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(163, 86);
+            this.label7.Location = new System.Drawing.Point(174, 29);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 17);
             this.label7.TabIndex = 14;
@@ -388,7 +380,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(517, 86);
+            this.label8.Location = new System.Drawing.Point(640, 29);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(126, 17);
             this.label8.TabIndex = 15;
@@ -398,7 +390,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(1033, 86);
+            this.label9.Location = new System.Drawing.Point(651, 171);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(95, 17);
             this.label9.TabIndex = 16;
@@ -408,7 +400,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(924, 362);
+            this.label10.Location = new System.Drawing.Point(1132, 28);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(134, 17);
             this.label10.TabIndex = 17;
@@ -418,7 +410,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(1215, 362);
+            this.label11.Location = new System.Drawing.Point(1160, 352);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(79, 17);
             this.label11.TabIndex = 18;
@@ -426,7 +418,7 @@
             // 
             // dtpVencimiento
             // 
-            this.dtpVencimiento.Location = new System.Drawing.Point(397, 582);
+            this.dtpVencimiento.Location = new System.Drawing.Point(643, 431);
             this.dtpVencimiento.Name = "dtpVencimiento";
             this.dtpVencimiento.Size = new System.Drawing.Size(200, 20);
             this.dtpVencimiento.TabIndex = 19;
@@ -435,7 +427,7 @@
             // 
             this.label.AutoSize = true;
             this.label.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label.Location = new System.Drawing.Point(394, 524);
+            this.label.Location = new System.Drawing.Point(640, 381);
             this.label.Name = "label";
             this.label.Size = new System.Drawing.Size(260, 17);
             this.label.TabIndex = 20;
@@ -444,17 +436,28 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(422, 557);
+            this.label12.Location = new System.Drawing.Point(640, 406);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(133, 13);
             this.label12.TabIndex = 21;
             this.label12.Text = "( por defecto es a un mes )";
             // 
+            // lblModificar
+            // 
+            this.lblModificar.AutoSize = true;
+            this.lblModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblModificar.Location = new System.Drawing.Point(26, 313);
+            this.lblModificar.Name = "lblModificar";
+            this.lblModificar.Size = new System.Drawing.Size(321, 17);
+            this.lblModificar.TabIndex = 22;
+            this.lblModificar.Text = "Modifique los campos deseados y oprima Aceptar";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1395, 639);
+            this.ClientSize = new System.Drawing.Size(1353, 654);
+            this.Controls.Add(this.lblModificar);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label);
             this.Controls.Add(this.dtpVencimiento);
@@ -463,7 +466,6 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnPagar);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnOrdenar);
@@ -528,7 +530,6 @@
         private System.Windows.Forms.Button btnPagar;
         private System.Windows.Forms.RadioButton rdbSocioEspecial;
         private System.Windows.Forms.RadioButton rdbSocioNormal;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
@@ -537,6 +538,7 @@
         private System.Windows.Forms.DateTimePicker dtpVencimiento;
         private System.Windows.Forms.Label label;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblModificar;
     }
 }
 

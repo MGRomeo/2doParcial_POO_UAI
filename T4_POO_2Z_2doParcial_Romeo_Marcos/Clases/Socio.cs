@@ -20,18 +20,8 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             Apellido = pApellido;
             Nombre = pNombre;
         }
-        public decimal ImporteRecargo(Cuota pCuota)
-        {
-            // $100 de recargo por dia de retraso en el pago
-            decimal recargo = 100;
-            Recargo = 0;
-            TimeSpan dias = pCuota.Fecha_vencimiento - pCuota.Fecha_inicio.AddMonths(1);
-            if (int.Parse(dias.Days.ToString()) > 0)
-            {
-                Recargo = recargo * int.Parse(dias.Days.ToString());
-            }
-            return Recargo;
-        }
+        public abstract decimal ImporteRecargo(Cuota pCuota);
+        
 
         public object Clone()
         {
@@ -40,7 +30,6 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }
