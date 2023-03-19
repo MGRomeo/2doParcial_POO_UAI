@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,29 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             Total = Importe + Socio.Recargo;
         }
 
+        public decimal CalculoTotal(Socio pSocio)
+        {
+            Total = Importe + pSocio.Recargo;
+            return Total;
+        }
         public object Clone()
         {
             return this.MemberwiseClone();
+        }
+
+        public class ImporteASC : IComparer<Cuota>
+        {
+            public int Compare(Cuota x, Cuota y)
+            {
+                return String.Compare((x.Importe).ToString(), y.Importe.ToString());
+            }
+        }
+        public class ImporteDESC : IComparer<Cuota>
+        {
+            public int Compare(Cuota x, Cuota y)
+            {
+                return String.Compare((x.Importe).ToString(), y.Importe.ToString()) * -1;
+            }
         }
     }
 }

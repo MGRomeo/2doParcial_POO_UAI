@@ -16,15 +16,11 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
 
 
         public Club()
-        {   //Todo: tambien borrar esto al finalizar las pruebas
+        {   
             ListaCuotasPendientes = new List<Cuota>();
             ListaCuotasPagas = new List<Cuota>();
             ListaSocios = new List<Socio>();
-            ListaSocios.AddRange(new Socio[] { new Socio_Especial() { Legajo = "111", Apellido = "Martinez", Nombre = "Ana", }, 
-                                               new Socio_Normal() { Legajo = "123", Apellido = "Garcia", Nombre = "Martin" },
-                                               new Socio_Especial() { Legajo = "222", Apellido = "Fernandez", Nombre = "Jorge" }, 
-                                              });
-        }
+         }
 
         public void CargarSocio(Socio pSocio)
         {
@@ -56,6 +52,7 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
         {
             foreach (var s in ListaSocios)
             {
+                // valido los objetos enviados en cada iteracion
                 if (ValidaCuota(s))
                 {
                     Cuota c = (Cuota)pCuota.Clone();
@@ -67,6 +64,7 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
                 }
                 else
                 {
+                    //si tiene mas de 2 cuotas adeudadas muestro msg
                     MensajeExcesoCuota(s);
                 }
             }
@@ -74,6 +72,7 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
 
         public bool ValidaCuota(Socio pSocio)
         {
+            // metodo de validacion para no tener mas de 2 cuotas adeudadas por los socios
             int cont = 0;
             foreach (var c in MostrarCuotasPendientes())
             {
@@ -91,14 +90,16 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
 
         public void BorrarCuota(string pLegajo, int pCodigo)
         {
+            //mediante legajo de socio y codigo de cuota elimino las cuotas abonadas
             var aux = ListaCuotasPendientes.Find(x => x.Socio.Legajo == pLegajo && x.Codigo == pCodigo);
+            // cargo la lista de cuotas abonadas
             ListaCuotasPagas.Add(aux);
             ListaCuotasPendientes.Remove(aux);
         }
 
         public void ModificarSocioEnCuota(Socio pSocio,Socio pModifica)
         {
-
+            // cambio el socio apuntado por la cuota
             Cuota existe = ListaCuotasPendientes.Find(x => x.Socio.Legajo == pSocio.Legajo);
             existe.Socio.Legajo = pModifica.Legajo;
             existe.Socio.Nombre= pModifica.Nombre;
@@ -110,7 +111,6 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             List<Socio> aux = ListaSocios;
             return aux;
         }
-
         public List<Cuota> MostrarCuotasPendientes()
         {
             List<Cuota> aux = ListaCuotasPendientes.ToList();
@@ -121,8 +121,10 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             List<Cuota> aux = ListaCuotasPagas.ToList();
             return aux;
         }
+
         public void MensajeExcesoCuota(Socio pSocio)
         {
+            // Mensaje de aviso 
             MessageBox.Show($"El socio; {pSocio.Apellido}, {pSocio.Nombre} posee 2 cuotas sin pagar, no se genera cuota para esta persona", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 

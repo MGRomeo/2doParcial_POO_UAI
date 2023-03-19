@@ -22,6 +22,8 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Configuraciones previas
+
             dgvSocios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvSocioTotal.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvCuotaPendiente.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -33,9 +35,6 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             dgvCuotaPagada.MultiSelect = false;
             dgvCuotaOrdenada.MultiSelect = false;
             lblModificar.Visible = false;
-            Mostrar(); //Todo: eliminar despues de probar todo
-
-
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -72,6 +71,7 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
 
                     }
                     Mostrar();
+                    // vuelvo el boton a la normalidad 
                     btnAgregar.Text = "Agregar";
                     lblModificar.Visible = false;
                     Limpiar();
@@ -94,8 +94,10 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
                 if (dgvSocios.Rows.Count != 0)
                 {
                     Socio aux = (Socio)dgvSocios.SelectedRows[0].DataBoundItem;
+                    // busco si existe el socio seleccionado
                     if (club.MostrarCuotasPendientes().Exists(x => x.Socio.Legajo == aux.Legajo))
                     {
+                        //Si debe cuotas no se borra
                         MessageBox.Show("Este socio no se puede eliminar, ya que posee cuotas pendientes", "Atençión", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                     else
@@ -118,8 +120,10 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             {
                 if (club.MostrarSocios().Count > 0)
                 {
+                    //Cambio el texto del boton y muestro una leyenda
                     lblModificar.Visible = true;
                     btnAgregar.Text = "Aceptar";
+                    // Coloco los parametros anteriores en los textbox, para modificar lo que se quiere
                     Socio aux = (Socio)dgvSocios.SelectedRows[0].DataBoundItem;
                     txtNombre.Text = aux.Nombre;
                     txtApellido.Text = aux.Apellido;
@@ -211,20 +215,18 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             catch (ExcesoCuotasPermitidas) { MessageBox.Show("Este socio posee 2 cuotas sin pagar, no se genera cuota", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
         }
 
-        public class IngresoVacio : Exception { }
-        public class IngresoRepetido : Exception { }
-        public class IngresoCodidoNoValido : Exception { }
-        public class IngresoingresoImporteNoValido : Exception { }
-        public class ExcesoCuotasPermitidas : Exception { }
-
+        //Metodo general para mostrar en todos los Dgv
         private void Mostrar()
         {
             dgvSocios.DataSource = null; dgvSocios.DataSource = club.MostrarSocios();
             if (club.MostrarSocios().Count > 0) { dgvSocios.Columns[3].Visible = false; }
             MostrarCuotasPendientes();
             MostrarCuotasPagas();
+            MostrarCuotasOrdenadas();
+            MostrarTotal();
         }
 
+        //Dgv n°2
         private void MostrarCuotasPendientes()
         {
             try
@@ -246,10 +248,12 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
 
         }
 
+        //Dgv n°3
         private void MostrarCuotasPagas()
         {
             try
             {
+                // utilizo LinQ para mostrar lo que se solicita en el dgv N|3
                 if (club.MostrarSocios().Count > 0)
                 {
 
@@ -262,10 +266,60 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             }
             catch (ArgumentNullException)
             {
-                MessageBox.Show("Falla por algo");
-                //Todo: falta investigar esta excepcion 
+
             }
 
+        }
+
+        //Dgv n°4
+        private void MostrarCuotasOrdenadas()
+        {
+            try
+            {
+                //utilizo la clase Ascendente
+                if (rdbMenorMayor.Checked == true)
+                {
+                    dgvCuotaOrdenada.DataSource = null;
+                    var Lista = club.MostrarCuotasPagas();
+                    Lista.Sort(new Cuota.ImporteASC());
+                    dgvCuotaOrdenada.DataSource = Lista;
+                }
+                else 
+                {
+                    //utilizo la clase descendente
+                    dgvCuotaOrdenada.DataSource = null;
+                    var Lista = club.MostrarCuotasPagas();
+                    Lista.Sort(new Cuota.ImporteDESC());
+                    dgvCuotaOrdenada.DataSource = Lista;
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        //Dgv n°5
+        public void MostrarTotal()
+        {
+            try
+            {
+                // al igual que en otros metodos selecciono la fuente de datos y creo la clase anonima para mostrar en dgv
+                if (club.MostrarSocios().Count > 0)
+                {
+                    Socio s = (Socio)dgvSocios.SelectedRows[0].DataBoundItem;
+                    var lc = from c in club.MostrarCuotasPagas() where c.Socio.Legajo == s.Legajo select new { Nombre = c.Codigo, Total = c.CalculoTotal(s) };
+                    dgvSocioTotal.DataSource = null;
+                    dgvSocioTotal.DataSource = lc.ToList();
+                }
+            }
+            catch (ArgumentNullException)
+            {
+                MessageBox.Show("Falla por algo");
+            }
         }
 
         private void Limpiar()
@@ -308,7 +362,9 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
             string legajo = (dgvCuotaPendiente.CurrentRow.Cells[5].Value.ToString());
             club.BorrarCuota(legajo, codigo);
             MostrarCuotasPendientes();
-            MostrarCuotasPagas();
+            MostrarCuotasPagas(); 
+            MostrarCuotasOrdenadas();
+            MostrarTotal();
         }
 
         private void dgvSocios_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -330,6 +386,17 @@ namespace T4_POO_2Z_2doParcial_Romeo_Marcos
         {
             Close();
         }
+
+        private void btnOrdenar_Click(object sender, EventArgs e)
+        {
+            MostrarCuotasOrdenadas();
+        }
+
+        public class IngresoVacio : Exception { }
+        public class IngresoRepetido : Exception { }
+        public class IngresoCodidoNoValido : Exception { }
+        public class IngresoingresoImporteNoValido : Exception { }
+        public class ExcesoCuotasPermitidas : Exception { }
 
     }
 }
